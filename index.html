@@ -1,0 +1,76 @@
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>PhotoMeasure</title>
+  <link rel="stylesheet" type="text/css" href="style.css" />
+</head>
+
+<body>
+    <h3>PhotoMeasure</h3>
+    <h6>&nbsp;&nbsp;&nbsp;- Marker Detection & Distance analysis - var0.0.1</h5>
+    <br>
+
+    <div class="flex">
+        <div id="WarpImage">
+            <p>解析画像</p>
+            <canvas id="transform_canvas0" style="width: 1px; height: 1px; display: none;"></canvas>
+            <canvas id="transform_canvas_preview" style="width: 600px; height: 600px; float: left; border: solid 1px black;"></canvas>
+        </div>
+    
+        <div id="OrgImage">
+            <p>撮影画像</p>
+            <canvas id="org_canvas0" style="width: 1px; height: 1px; display: none;"></canvas>
+            <canvas id="org_canvas_preview" style="width: 300px; height: 300px; float: left; border: solid 1px black;"></canvas>
+            <div class="spacer"></div>
+
+            <div id="control">
+              <b class="marginTop">[1] 画像の登録</b><br>
+              <div class="btn">
+              <label class="btn-circle-flat" id="uploadBtn">
+               <input id="upload" type="file" name="image" accept="image/*" capture="camera">撮影
+              </label>
+              <label class="btn-oval_flat">
+                <input id="uploadSrc" type="file" name="image" accept="image/*">アルバムから選択
+              </label>
+              <br>
+              <label for="sizeLimitSizeCheckBox">
+                <input id="sizeLimitSizeCheckBox" type="checkbox" name="sizeLimitSizeCheckBox" value="1">サイズを1,920pixelに制限する
+              </label>  
+            </div>
+              
+              <br>
+              
+              <form class="settingForm">
+                <b>[2] 設定と解析</b><br>
+                <label class="settingLabel" for="textForm">基準マーカーＩＤ:</label>
+                <a id="spin-btn0minus" class="spin-btn" style="display: inline-block;">&minus;</a>
+                <input class="settingId" type="number" inputmode="numeric" step="1" id="targetMarker0" value="1" readonly>
+                <a id="spin-btn0plus" class="spin-btn" style="display: inline-block;">&plus;</a><br>
+                
+                <label class="settingLabel" for="textForm">目標マーカーＩＤ:</label>
+                <a id="spin-btn1minus" class="spin-btn" style="display: inline-block;">&minus;</a>
+                <input class="settingId" type="number" inputmode="numeric" step="1" id="targetMarker1" value="2" readonly>
+                <a id="spin-btn1plus" class="spin-btn" style="display: inline-block;">&plus;</a><br>
+
+                <label class="settingLabel" for="textForm">マーカー　実辺長:</label>
+                <input class="settingSize" type="number" step="0.1" id="markerSize" value="50.0">mm
+              </form>
+              <div class="btn">
+                <button  id="analysisBtn" class="btn-circle-flat" type=”button” onclick="analysis()">解析</button>
+                <button  id="downloadBtn" class="btn-oval_flat" type=”button”>解析画像ダウンロード</button>
+              </div>
+
+            </div>
+        </div>
+
+        <div>
+        <textarea id="statusWindow" readonly>＜処理結果＞</textarea>
+      </div>
+    </div>
+
+    <script src="svd.js"></script>
+    <script src="cv.js"></script>
+    <script src="aruco.js"></script>
+    <script src="HomographyLightweight.min.js"></script>
+    <script src="main.js"></script>
+</body>
